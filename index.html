@@ -1,0 +1,671 @@
+
+
+Index · HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mrs. T.C. Phiri's 80th Birthday — Weekend Celebration</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap');
+ 
+  :root{
+    --navy:#0d1b33;
+    --navy-deep:#081222;
+    --gold:#c9a24b;
+    --gold-light:#e9d6a3;
+    --cream:#f6f0e2;
+    --blush:#e8b7bb;
+    --sky:#7fa3c9;
+    --ink:#1c2434;
+  }
+ 
+  *{margin:0;padding:0;box-sizing:border-box;}
+ 
+  html{scroll-behavior:smooth;}
+ 
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+ 
+  h1,h2,h3,.display{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    letter-spacing:0.01em;
+  }
+ 
+  .eyebrow{
+    font-family:'Jost',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.28em;
+    font-size:0.72rem;
+    font-weight:500;
+    color:var(--gold);
+  }
+ 
+  a{color:inherit;text-decoration:none;}
+ 
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.1rem 6vw;
+    background:rgba(13,27,51,0.0);
+    transition:background 0.4s ease, padding 0.4s ease, box-shadow .4s ease;
+  }
+  nav.scrolled{
+    background:rgba(13,27,51,0.92);
+    backdrop-filter:blur(8px);
+    padding:0.7rem 6vw;
+    box-shadow:0 6px 24px rgba(0,0,0,0.25);
+  }
+  nav .brand{
+    font-family:'Cormorant Garamond',serif;
+    color:var(--gold-light);
+    font-size:1.15rem;
+    letter-spacing:0.05em;
+  }
+  nav .links{display:flex;gap:1.8rem;}
+  nav .links a{
+    color:var(--cream);
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    opacity:0.85;
+    transition:opacity .25s;
+  }
+  nav .links a:hover{opacity:1;color:var(--gold-light);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--cream);font-size:1.5rem;cursor:pointer;}
+ 
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(201,162,75,0.18), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(201,162,75,0.12), transparent 40%),
+      linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:7rem 6vw 4rem;
+    overflow:hidden;
+  }
+  .confetti{
+    position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(2px 2px at 10% 20%, var(--gold-light) 40%, transparent 41%),
+      radial-gradient(2px 2px at 80% 30%, var(--sky) 40%, transparent 41%),
+      radial-gradient(1.5px 1.5px at 60% 70%, var(--gold) 40%, transparent 41%),
+      radial-gradient(2px 2px at 30% 85%, var(--blush) 40%, transparent 41%),
+      radial-gradient(1.5px 1.5px at 90% 90%, var(--gold-light) 40%, transparent 41%),
+      radial-gradient(1.5px 1.5px at 50% 10%, var(--sky) 40%, transparent 41%),
+      radial-gradient(2px 2px at 15% 55%, var(--gold) 40%, transparent 41%),
+      radial-gradient(1.5px 1.5px at 70% 50%, var(--blush) 40%, transparent 41%);
+    opacity:0.6;
+  }
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+    text-align:center;
+  }
+  .eighty-mark{
+    position:relative;
+    width:min(70vw,420px);
+    height:min(70vw,420px);
+    margin:0 auto 1.2rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .eighty-mark svg{width:100%;height:100%;}
+  .eighty-mark .center-text{
+    position:absolute;
+    color:var(--cream);
+  }
+  .eighty-mark .center-text .eyebrow{
+    color:var(--gold-light);
+    display:block;
+    margin-bottom:0.3rem;
+  }
+  .eighty-mark .center-text h1{
+    font-size:clamp(1.6rem,4.4vw,2.5rem);
+    color:var(--cream);
+    line-height:1.05;
+  }
+  .hero-sub{
+    margin-top:2.2rem;
+    font-size:1.15rem;
+    color:var(--gold-light);
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.5rem;
+  }
+  .hero-meta{
+    margin-top:1.6rem;
+    display:flex;
+    gap:2.5rem;
+    justify-content:center;
+    flex-wrap:wrap;
+    color:var(--cream);
+  }
+  .hero-meta div{text-align:center;}
+  .hero-meta .label{
+    font-size:0.68rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--sky);
+    display:block;
+    margin-bottom:0.35rem;
+  }
+  .hero-meta .value{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.25rem;
+    color:var(--cream);
+  }
+  .hero-cta{
+    margin-top:2.8rem;
+    display:inline-block;
+    padding:0.95rem 2.6rem;
+    border:1px solid var(--gold);
+    color:var(--gold-light);
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    font-size:0.75rem;
+    transition:background .3s, color .3s;
+  }
+  .hero-cta:hover{background:var(--gold);color:var(--navy-deep);}
+ 
+  .scroll-cue{
+    position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+    color:var(--gold-light);opacity:0.6;
+    font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  }
+  .scroll-cue .line{width:1px;height:34px;background:var(--gold-light);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
+ 
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:6rem 6vw;}
+  .section-head{max-width:640px;margin:0 auto 3.5rem;text-align:center;}
+  .section-head .eyebrow{display:block;margin-bottom:0.6rem;}
+  .section-head h2{font-size:clamp(1.9rem,4vw,2.8rem);color:var(--navy);}
+  .section-head p{margin-top:1rem;color:#5c5648;font-size:1rem;}
+ 
+  /* ---------- TRIBUTE ---------- */
+  .tribute{
+    background:linear-gradient(160deg,var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--cream);
+    position:relative;
+  }
+  .tribute::before{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 90% 10%, rgba(201,162,75,0.15), transparent 40%),
+      radial-gradient(circle at 5% 90%, rgba(127,163,201,0.12), transparent 40%);
+  }
+  .tribute-inner{position:relative;max-width:760px;margin:0 auto;text-align:center;}
+  .tribute .eyebrow{color:var(--gold-light);}
+  .tribute blockquote{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(1.25rem,2.6vw,1.7rem);
+    font-weight:500;
+    line-height:1.55;
+    margin:1.6rem 0 2rem;
+    color:var(--gold-light);
+  }
+  .tribute p{color:#d9dde6;font-size:1rem;margin-bottom:1.1rem;}
+  .tribute .verse{
+    margin-top:1.8rem;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.2rem;
+    color:var(--sky);
+  }
+  .tribute .signoff{
+    margin-top:2.2rem;
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.15rem;
+    color:var(--cream);
+  }
+ 
+  /* ---------- TIMELINE ---------- */
+  .timeline{background:var(--cream);}
+  .day-list{
+    max-width:920px;margin:0 auto;
+    display:flex;flex-direction:column;gap:0;
+    border-left:1px solid rgba(13,27,51,0.15);
+    margin-left:1rem;
+  }
+  .day{
+    position:relative;
+    padding:0 0 3.4rem 2.6rem;
+  }
+  .day:last-child{padding-bottom:0;}
+  .day::before{
+    content:"";
+    position:absolute;left:-1.05rem;top:0.35rem;
+    width:0.9rem;height:0.9rem;
+    border-radius:50%;
+    background:var(--cream);
+    border:2px solid var(--dot,var(--gold));
+  }
+  .day.gold{--dot:var(--gold);}
+  .day.blush{--dot:var(--blush);}
+  .day.navy{--dot:var(--navy);}
+  .day.sky{--dot:var(--sky);}
+ 
+  .day-date{
+    font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;
+    color:#8a8371;margin-bottom:0.4rem;
+  }
+  .day-card{
+    background:#fff;
+    border:1px solid rgba(13,27,51,0.08);
+    border-radius:2px;
+    padding:1.8rem 2rem;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:1.5rem;
+    box-shadow:0 10px 30px rgba(13,27,51,0.04);
+  }
+  .day-card .info{flex:1 1 320px;}
+  .day-card h3{
+    font-size:1.5rem;color:var(--navy);margin-bottom:0.5rem;
+  }
+  .day-card .tag{
+    display:inline-block;
+    font-size:0.62rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:#fff;
+    background:var(--dot,var(--gold));
+    padding:0.3rem 0.7rem;
+    border-radius:2px;
+    margin-bottom:0.9rem;
+  }
+  .day-card p{color:#4c4738;font-size:0.94rem;margin-bottom:0.5rem;}
+  .day-card .facts{
+    flex:0 0 240px;
+    border-left:1px solid rgba(13,27,51,0.08);
+    padding-left:1.5rem;
+    display:flex;flex-direction:column;gap:0.7rem;
+  }
+  .day-card .facts .f-label{
+    font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:#a39a80;
+  }
+  .day-card .facts .f-val{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.05rem;color:var(--navy);
+  }
+ 
+  /* ---------- STAY / TRAVEL GRID ---------- */
+  .stay{background:#fff;}
+  .stay-grid{
+    max-width:1080px;margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:1.6rem;
+  }
+  .stay-card{
+    border:1px solid rgba(13,27,51,0.1);
+    padding:1.9rem 1.7rem;
+    position:relative;
+    background:var(--cream);
+    transition:transform .3s, box-shadow .3s;
+  }
+  .stay-card:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(13,27,51,0.08);}
+  .stay-card .num{
+    font-family:'Cormorant Garamond',serif;
+    font-size:0.85rem;color:var(--gold);
+    letter-spacing:0.1em;
+    display:block;margin-bottom:0.6rem;
+    text-transform:uppercase;
+  }
+  .stay-card h3{font-size:1.3rem;color:var(--navy);margin-bottom:0.3rem;}
+  .stay-card .tagline{font-size:0.78rem;color:var(--sky);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.8rem;}
+  .stay-card p{font-size:0.9rem;color:#5c5648;}
+ 
+  /* ---------- TWO COL: TRANSPORT + THINGS TO DO ---------- */
+  .twocol{
+    background:var(--navy);
+    color:var(--cream);
+  }
+  .twocol-inner{
+    max-width:1080px;margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:3rem;
+  }
+  .twocol h3{
+    font-size:1.5rem;color:var(--gold-light);margin-bottom:1.2rem;
+    display:flex;align-items:center;gap:0.6rem;
+  }
+  .twocol h3::before{content:"";width:22px;height:1px;background:var(--gold);display:inline-block;}
+  .twocol p{color:#c8cddb;font-size:0.92rem;margin-bottom:1rem;}
+  .twocol ul{list-style:none;}
+  .twocol li{
+    padding:0.55rem 0;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    font-size:0.92rem;
+    color:#dfe3ec;
+  }
+  .twocol li b{color:var(--cream);font-weight:500;}
+  .todo-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem 1.4rem;}
+  .todo-grid .item b{display:block;color:var(--cream);font-size:0.93rem;margin-bottom:0.15rem;}
+  .todo-grid .item span{font-size:0.8rem;color:#aeb6c9;font-style:italic;}
+ 
+  /* ---------- RSVP FOOTER ---------- */
+  .rsvp{
+    background:linear-gradient(160deg,var(--navy-deep),var(--navy));
+    text-align:center;
+    color:var(--cream);
+    position:relative;
+    overflow:hidden;
+  }
+  .rsvp::before{
+    content:"80";
+    position:absolute;
+    font-family:'Cormorant Garamond',serif;
+    font-size:min(50vw,600px);
+    font-weight:700;
+    color:rgba(201,162,75,0.05);
+    top:50%;left:50%;
+    transform:translate(-50%,-45%);
+    line-height:1;
+    pointer-events:none;
+  }
+  .rsvp-inner{position:relative;max-width:600px;margin:0 auto;}
+  .rsvp h2{font-size:clamp(1.8rem,4vw,2.6rem);color:var(--cream);margin-bottom:1rem;}
+  .rsvp p{color:#c8cddb;margin-bottom:2.2rem;font-size:1rem;}
+  .rsvp-btn{
+    display:inline-block;
+    background:var(--gold);
+    color:var(--navy-deep);
+    padding:1rem 3rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    font-size:0.78rem;
+    border-radius:2px;
+    transition:background .3s, transform .3s;
+  }
+  .rsvp-btn:hover{background:var(--gold-light);transform:translateY(-2px);}
+  .rsvp .fine{margin-top:2rem;font-size:0.78rem;color:#8a92a8;}
+ 
+  footer{
+    background:var(--navy-deep);
+    color:#6d7590;
+    text-align:center;
+    padding:2rem 6vw;
+    font-size:0.75rem;
+    letter-spacing:0.08em;
+  }
+ 
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:820px){
+    .twocol-inner{grid-template-columns:1fr;}
+    .todo-grid{grid-template-columns:1fr;}
+    nav .links{
+      position:fixed;top:0;right:0;height:100vh;width:70vw;max-width:300px;
+      background:var(--navy-deep);
+      flex-direction:column;
+      justify-content:center;
+      align-items:flex-start;
+      padding:2rem;
+      gap:1.6rem;
+      transform:translateX(100%);
+      transition:transform .35s ease;
+    }
+    nav .links.open{transform:translateX(0);}
+    .nav-toggle{display:block;}
+  }
+  @media (max-width:600px){
+    .day-card{flex-direction:column;}
+    .day-card .facts{border-left:none;border-top:1px solid rgba(13,27,51,0.08);padding-left:0;padding-top:1rem;}
+    .hero-meta{gap:1.4rem;}
+    section{padding:4.5rem 6vw;}
+  }
+</style>
+</head>
+<body>
+ 
+<nav id="nav">
+  <div class="brand">T. C. Phiri &mdash; 80</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+  <div class="links" id="navLinks">
+    <a href="#schedule">Schedule</a>
+    <a href="#tribute">Tribute</a>
+    <a href="#stay">Stay</a>
+    <a href="#travel">Travel</a>
+    <a href="#rsvp">RSVP</a>
+  </div>
+</nav>
+ 
+<!-- HERO -->
+<header class="hero">
+  <div class="confetti"></div>
+  <div class="hero-inner">
+    <div class="eighty-mark">
+      <svg viewBox="0 0 400 400">
+        <circle cx="200" cy="200" r="196" fill="none" stroke="#c9a24b" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="200" cy="200" r="175" fill="none" stroke="#c9a24b" stroke-width="1" opacity="0.3"/>
+      </svg>
+      <div class="center-text">
+        <span class="eyebrow">You are joyfully invited</span>
+        <h1>Mrs. T.C. Phiri's<br>Eightieth Birthday</h1>
+      </div>
+    </div>
+    <p class="hero-sub">A weekend of faith, family, and celebration</p>
+    <div class="hero-meta">
+      <div>
+        <span class="label">Weekend of</span>
+        <span class="value">Dec 18&ndash;20, 2026</span>
+      </div>
+      <div>
+        <span class="label">Gala Venue</span>
+        <span class="value">The New Savoy Hotel</span>
+      </div>
+      <div>
+        <span class="label">Location</span>
+        <span class="value">Ndola, Zambia</span>
+      </div>
+    </div>
+    <a href="#rsvp" class="hero-cta">RSVP Now</a>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</header>
+ 
+<!-- TRIBUTE -->
+<section class="tribute" id="tribute">
+  <div class="tribute-inner">
+    <span class="eyebrow">A Life Well Lived</span>
+    <blockquote>A legacy of love, wisdom, and devotion — 80 years of God's favor. Today we honor a life that has poured strength into generations, a heart that has nurtured family, and a spirit that continues to shine with grace.</blockquote>
+    <p>May this celebration remind us of the beauty of a life lived faithfully, the joy of family gathered in unity, and the blessing of witnessing God's goodness through every season.</p>
+    <p class="verse">&ldquo;For with You is the fountain of life; in Your light we see light.&rdquo; &mdash; Psalm 36:9</p>
+    <p class="signoff">With gratitude, we celebrate Mrs. T.C. Phiri — a devoted wife, mother, grandmother, sister, friend, and pillar of faith whose journey continues to inspire us all.</p>
+  </div>
+</section>
+ 
+<!-- SCHEDULE -->
+<section class="timeline" id="schedule">
+  <div class="section-head">
+    <span class="eyebrow">Full Weekend Schedule</span>
+    <h2>Four Days of Celebration</h2>
+    <p>From casual welcome drinks to an elegant black-tie gala and a relaxed family send-off &mdash; here's everything happening across the weekend.</p>
+  </div>
+ 
+  <div class="day-list">
+ 
+    <div class="day gold">
+      <div class="day-date">Friday &middot; December 18, 2026</div>
+      <div class="day-card">
+        <div class="info">
+          <span class="tag">Early Arrivals</span>
+          <h3>Welcome Drinks &amp; Dinner</h3>
+          <p>A casual, friendly start to the weekend for anyone already in town — relaxed drinks and dinner at Zanzibar Restaurant.</p>
+        </div>
+        <div class="facts">
+          <div><div class="f-label">Time</div><div class="f-val">From 18:00 hrs</div></div>
+          <div><div class="f-label">Location</div><div class="f-val">Zanzibar Restaurant, Ndola</div></div>
+          <div><div class="f-label">Dress Code</div><div class="f-val">No dress code — come as you are</div></div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="day blush">
+      <div class="day-date">Saturday Morning &middot; December 19, 2026</div>
+      <div class="day-card">
+        <div class="info">
+          <span class="tag">Thanksgiving Service</span>
+          <h3>A Service of Gratitude</h3>
+          <p>We gather for a beautiful Thanksgiving Service to honor God's goodness and celebrate this special milestone together, followed by a take-away lunch for all guests.</p>
+        </div>
+        <div class="facts">
+          <div><div class="f-label">Time</div><div class="f-val">10:00 &ndash; 11:00 AM</div></div>
+          <div><div class="f-label">Location</div><div class="f-val">The Cathedral of the Holy Nativity<br>Cnr. Kabelenga &amp; Broadway, Ndola</div></div>
+          <div><div class="f-label">Theme Colors</div><div class="f-val">Pink with a hint of blue</div></div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="day navy">
+      <div class="day-date">Saturday Evening &middot; December 19, 2026</div>
+      <div class="day-card">
+        <div class="info">
+          <span class="tag">Black-Tie Gala</span>
+          <h3>The 80th Birthday Party</h3>
+          <p>An unforgettable evening of fine dining, music, and celebration at one of Ndola's most iconic venues, as we mark this remarkable milestone with family and friends.</p>
+        </div>
+        <div class="facts">
+          <div><div class="f-label">Time</div><div class="f-val">18:00 &ndash; 01:00 hrs</div></div>
+          <div><div class="f-label">Location</div><div class="f-val">The New Savoy Hotel<br>Buteko Road, City Centre, Ndola</div></div>
+          <div><div class="f-label">Dress Code</div><div class="f-val">Black tie with royal blue accents</div></div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="day sky">
+      <div class="day-date">Sunday &middot; December 20, 2026</div>
+      <div class="day-card">
+        <div class="info">
+          <span class="tag">Family BBQ</span>
+          <h3>A Joyful Send-Off</h3>
+          <p>We close the weekend with a warm and relaxed family BBQ, filled with good food, laughter, and time together — a casual afternoon to celebrate family and fellowship.</p>
+        </div>
+        <div class="facts">
+          <div><div class="f-label">Time</div><div class="f-val">From 13:00 hrs</div></div>
+          <div><div class="f-label">Location</div><div class="f-val">Phiri Residence<br>3452 Kangere Square, Northrise, Ndola</div></div>
+          <div><div class="f-label">Dress Code</div><div class="f-val">Blue denim + event T-shirt</div></div>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- STAY -->
+<section class="stay" id="stay">
+  <div class="section-head">
+    <span class="eyebrow">Where to Stay</span>
+    <h2>Recommended Accommodation in Ndola</h2>
+    <p>Ndola offers a range of comfortable, convenient options for guests attending the weekend. Below are recommended stays close to key venues.</p>
+  </div>
+  <div class="stay-grid">
+    <div class="stay-card">
+      <span class="num">Elegant &amp; Convenient</span>
+      <h3>Savoy Hotel</h3>
+      <div class="tagline">On Buteko Road</div>
+      <p>Newly refreshed, and right by the Saturday Black-Tie Gala venue — a top choice for guests who want to stay close to the celebration.</p>
+    </div>
+    <div class="stay-card">
+      <span class="num">Premium Comfort</span>
+      <h3>Protea Hotel by Marriott</h3>
+      <div class="tagline">Ndola</div>
+      <p>A modern, internationally rated hotel known for excellent service, spacious rooms, and a relaxing poolside area.</p>
+    </div>
+    <div class="stay-card">
+      <span class="num">Stylish &amp; Contemporary</span>
+      <h3>The Urban Hotel Ndola</h3>
+      <div class="tagline">Boutique</div>
+      <p>A chic, modern hotel with beautiful interiors, great dining, and a calm atmosphere — perfect for a refined stay.</p>
+    </div>
+    <div class="stay-card">
+      <span class="num">Spacious &amp; Family-Friendly</span>
+      <h3>Mukuba Hotel</h3>
+      <div class="tagline">Groups &amp; Family</div>
+      <p>A long-established Ndola hotel with large grounds, a pool, and comfortable rooms — practical for groups and extended family.</p>
+    </div>
+    <div class="stay-card">
+      <span class="num">Quiet &amp; Affordable</span>
+      <h3>Greenwood Lodge</h3>
+      <div class="tagline">Budget-Friendly</div>
+      <p>A cozy lodge offering clean rooms, warm hospitality, and a peaceful environment without being far from the city.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- TRAVEL + THINGS TO DO -->
+<section class="twocol" id="travel">
+  <div class="twocol-inner">
+    <div>
+      <h3>Getting Around Ndola</h3>
+      <p>Ndola is served by Simon Mwansa Kapwepwe International Airport (NLA). Guests may arrange airport pick-ups through hotel shuttles or private taxi operators at the arrival area.</p>
+      <ul>
+        <li><b>Hotel Shuttle</b> — available at Protea &amp; The Urban Hotel</li>
+        <li><b>Private Car Hire</b> — Avis, Europcar Zambia, Owen's Car Hire</li>
+        <li><b>Local Taxis</b> — bookable by phone or hotel concierge, ideal for hops between hotels, Njele Country Park, the Cathedral, and the Phiri Residence</li>
+        <li><b>Ride-Hailing Apps</b> — Ulendo Taxi &amp; Yango, for safe transport with upfront pricing</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Things to Do in Ndola</h3>
+      <div class="todo-grid">
+        <div class="item"><b>Dag Hammarskjöld Memorial</b><span>Peaceful &amp; historic</span></div>
+        <div class="item"><b>Copperbelt Museum</b><span>Mining history + heritage</span></div>
+        <div class="item"><b>Café Zed</b><span>Modern brunch + coffee</span></div>
+        <div class="item"><b>Buteko Road &amp; City Centre</b><span>Shops, markets, culture</span></div>
+        <div class="item"><b>Lake Chilengwa</b><span>Scenic natural landmark</span></div>
+        <div class="item"><b>Protea Hotel Poolside</b><span>Relax, dine, unwind</span></div>
+        <div class="item"><b>Ndola Golf Club</b><span>Great course + clubhouse</span></div>
+        <div class="item"><b>Local Craft Markets</b><span>Chitenge, carvings, handmade items</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- RSVP -->
+<section class="rsvp" id="rsvp">
+  <div class="rsvp-inner">
+    <span class="eyebrow">We Can't Wait to Celebrate With You</span>
+    <h2>Please RSVP</h2>
+    <p>Kindly let us know if you'll be joining us for the weekend so we can prepare a seat, a plate, and a warm welcome.</p>
+    <a class="rsvp-btn" href="mailto:?subject=RSVP%20-%20Mrs%20T.C.%20Phiri's%2080th%20Birthday">Send Your RSVP</a>
+    <p class="fine">Weekend of December 18&ndash;20, 2026 &middot; Ndola, Zambia</p>
+  </div>
+</section>
+ 
+<footer>
+  With love, from the Phiri family &middot; Celebrating 80 years of grace
+</footer>
+ 
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
+ 
+</body>
+</html>
+ 
