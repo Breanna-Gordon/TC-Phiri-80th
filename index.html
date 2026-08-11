@@ -405,28 +405,21 @@
         <div id="rsvpNameStep">
           <label for="rsvpName" style="display:block;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#8a92a8;margin-bottom:0.35rem;">Full Name</label>
           <input type="text" id="rsvpName" placeholder="Your full name" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(201,162,75,0.35);color:var(--cream);padding:0.65rem 0.8rem;font-family:'Jost',sans-serif;font-size:0.85rem;border-radius:3px;margin-bottom:1rem;">
+
+          <label for="tSize" style="display:block;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#8a92a8;margin-bottom:0.35rem;">Sunday BBQ T-Shirt Size</label>
+          <select id="tSize" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(201,162,75,0.35);color:var(--cream);padding:0.65rem 0.8rem;font-family:'Jost',sans-serif;font-size:0.85rem;border-radius:3px;margin-bottom:0.4rem;">
+            <option value="">Select size</option>
+            <option>XS</option><option>S</option><option>M</option>
+            <option>L</option><option>XL</option><option>XXL</option>
+          </select>
+          <p style="font-size:0.72rem;color:#8a92a8;margin-bottom:1rem;">We'll have your event tee ready for Sunday.</p>
+
           <button type="button" id="rsvpConfirm" style="width:100%;background:var(--gold);color:var(--navy-deep);border:none;padding:0.75rem;letter-spacing:0.15em;text-transform:uppercase;font-size:0.68rem;border-radius:3px;cursor:pointer;">Confirm RSVP</button>
         </div>
 
         <div id="rsvpAfter" style="display:none;">
-          <div class="wa-wrap">
-            <p style="margin-bottom:0.9rem;">Thanks — you're on the list! Tap below to join the family WhatsApp group for updates and reminders.</p>
+          <div class="wa-wrap" style="margin-bottom:0;">
             <a class="wa-btn" href="https://chat.whatsapp.com/J9bFEF27d5BIFH49oUVvSt" target="_blank" rel="noopener">Join the WhatsApp Group</a>
-          </div>
-
-          <div class="tshirt-form">
-            <h5>Sunday BBQ T-Shirt</h5>
-            <p class="desc">Let us know your size so we have your event tee ready for Sunday.</p>
-            <label for="tName">Full Name</label>
-            <input type="text" id="tName" placeholder="Your full name">
-            <label for="tSize">T-Shirt Size</label>
-            <select id="tSize">
-              <option value="">Select size</option>
-              <option>XS</option><option>S</option><option>M</option>
-              <option>L</option><option>XL</option><option>XXL</option>
-            </select>
-            <button type="button" id="tSubmit">Send via WhatsApp</button>
-            <p class="confirm" id="tConfirm">Thank you — opening WhatsApp with your order...</p>
           </div>
         </div>
       </div>
@@ -481,29 +474,25 @@
 
   document.getElementById('rsvpConfirm').addEventListener('click', () => {
     const name = document.getElementById('rsvpName').value.trim();
+    const size = document.getElementById('tSize').value;
     if(!name){ alert('Please enter your name.'); return; }
+
     submitToGoogleForm(RSVP_FORM_ID, {
       'entry.463051025': name,
       'entry.1267824279': SITE_TAG
     });
+
+    if(size){
+      submitToGoogleForm(TSHIRT_FORM_ID, {
+        'entry.1971484509': name,
+        'entry.1711997983': size
+      });
+      const msg = encodeURIComponent('T-Shirt Order for Mrs. T.C. Phiri\'s 80th Birthday (Sunday BBQ)\nName: ' + name + '\nSize: ' + size);
+      window.open(`https://wa.me/18328538764?text=${msg}`, '_blank');
+    }
+
     document.getElementById('rsvpNameStep').style.display = 'none';
     document.getElementById('rsvpAfter').style.display = 'block';
-  });
-
-  document.getElementById('tSubmit').addEventListener('click', () => {
-    const name = document.getElementById('tName').value.trim();
-    const size = document.getElementById('tSize').value;
-    if(!name || !size){
-      alert('Please enter your name and select a size.');
-      return;
-    }
-    submitToGoogleForm(TSHIRT_FORM_ID, {
-      'entry.1971484509': name,
-      'entry.1711997983': size
-    });
-    const msg = encodeURIComponent('T-Shirt Order for Mrs. T.C. Phiri\'s 80th Birthday (Sunday BBQ)\nName: ' + name + '\nSize: ' + size);
-    window.open(`https://wa.me/18328538764?text=${msg}`, '_blank');
-    document.getElementById('tConfirm').style.display = 'block';
   });
 </script>
 
