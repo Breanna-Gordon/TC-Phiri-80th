@@ -144,6 +144,13 @@
   .rsvp-btn2{display:inline-block;background:var(--gold);color:var(--navy-deep);padding:0.8rem 1.9rem;letter-spacing:0.15em;text-transform:uppercase;font-size:0.72rem;border-radius:2px;}
   .rsvp-frame .fine{margin-top:2rem;font-size:0.76rem;color:#8a92a8;}
 
+  .guest-row{display:flex;gap:0.6rem;margin-bottom:0.7rem;align-items:center;}
+  .guest-row input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(201,162,75,0.35);color:var(--cream);padding:0.65rem 0.8rem;font-family:'Jost',sans-serif;font-size:0.85rem;border-radius:3px;}
+  .removeGuest{flex:0 0 auto;background:transparent;border:1px solid rgba(201,162,75,0.4);color:var(--gold-light);width:32px;height:32px;border-radius:3px;cursor:pointer;font-size:1rem;line-height:1;}
+  .removeGuest:hover{background:rgba(201,162,75,0.15);}
+  .add-guest-btn{width:100%;background:transparent;border:1px dashed rgba(201,162,75,0.45);color:var(--gold-light);padding:0.6rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;border-radius:3px;cursor:pointer;margin-bottom:1rem;}
+  .add-guest-btn:hover{background:rgba(201,162,75,0.1);}
+
   .tshirt-form{border-top:1px solid rgba(201,162,75,0.25);padding-top:1.4rem;margin-top:0.4rem;}
   .tshirt-form h5{font-family:'Cormorant Garamond',serif;color:var(--gold-light);font-size:1.05rem;margin-bottom:0.3rem;text-align:center;}
   .tshirt-form .desc{font-size:0.8rem;color:#aeb6c9;text-align:center;margin-bottom:1rem;}
@@ -241,8 +248,8 @@
         </div>
         <div class="facts">
           <div><div class="f-label">Time</div><div class="f-val">10:00 &ndash; 11:00 AM</div></div>
-          <div><div class="f-label">Location</div><div class="f-val">The Cathedral of the Holy Nativity<br>Cnr. Kabelenga &amp; Broadway, Ndola</div></div>
-          <div><div class="f-label">Theme Colors</div><div class="f-val">Pink with a hint of blue</div></div>
+          <div><div class="f-label">Location</div><div class="f-val">The Cathedral of Christ the King<br>Cnr. Kabelenga &amp; Broadway, Ndola</div></div>
+          <div><div class="f-label">Theme Colors</div><div class="f-val">Pastel Colours</div></div>
         </div>
       </div>
     </div>
@@ -370,8 +377,15 @@
         <h4>We can't wait to see you!</h4>
 
         <div id="rsvpNameStep">
-          <label for="rsvpName" style="display:block;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#8a92a8;margin-bottom:0.35rem;">Full Name</label>
-          <input type="text" id="rsvpName" placeholder="Your full name" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(201,162,75,0.35);color:var(--cream);padding:0.65rem 0.8rem;font-family:'Jost',sans-serif;font-size:0.85rem;border-radius:3px;margin-bottom:1rem;">
+          <label style="display:block;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#8a92a8;margin-bottom:0.35rem;">Full Name(s)</label>
+          <p style="font-size:0.72rem;color:#8a92a8;margin-bottom:0.8rem;">RSVPing for more than yourself? Add each guest below.</p>
+          <div id="guestRows">
+            <div class="guest-row">
+              <input type="text" class="guestName" placeholder="Guest full name">
+              <button type="button" class="removeGuest" aria-label="Remove guest">&times;</button>
+            </div>
+          </div>
+          <button type="button" id="addGuest" class="add-guest-btn">+ Add another guest</button>
           <button type="button" id="rsvpConfirm" style="width:100%;background:var(--gold);color:var(--navy-deep);border:none;padding:0.75rem;letter-spacing:0.15em;text-transform:uppercase;font-size:0.68rem;border-radius:3px;cursor:pointer;">Confirm RSVP</button>
         </div>
 
@@ -383,10 +397,13 @@
       </div>
       <div class="card" id="cardNo">
         <h4>You'll be missed</h4>
-        <p>Thank you for letting us know. We'll be celebrating with you in spirit — feel free to send Mrs. Phiri a message closer to the day.</p>
-        <div style="text-align:center;">
-          <a class="rsvp-btn2" href="mailto:?subject=RSVP%20-%20Mrs%20T.C.%20Phiri's%2080th%20Birthday">Send a Message</a>
+        <div id="noNameStep">
+          <p>Thank you for letting us know — it helps us plan. Please share your name below.</p>
+          <label style="display:block;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#8a92a8;margin-bottom:0.35rem;">Full Name</label>
+          <input type="text" id="noName" placeholder="Your full name" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(201,162,75,0.35);color:var(--cream);padding:0.65rem 0.8rem;font-family:'Jost',sans-serif;font-size:0.85rem;border-radius:3px;margin-bottom:1rem;">
+          <button type="button" id="noConfirm" style="width:100%;background:var(--gold);color:var(--navy-deep);border:none;padding:0.75rem;letter-spacing:0.15em;text-transform:uppercase;font-size:0.68rem;border-radius:3px;cursor:pointer;">Confirm</button>
         </div>
+        <p id="noAfter" style="display:none;text-align:center;color:#c8cddb;font-size:0.88rem;">Thank you — we'll be celebrating with you in spirit.</p>
       </div>
     </div>
 
@@ -428,15 +445,48 @@
   const RSVP_FORM_ID = '1FAIpQLSfYyKwjyRZm5Wh0APUqMdRTPj8jdGpfRd2LufMJKXsNRGD6UQ';
   const SITE_TAG = 'General';
 
+  // Dynamic guest rows
+  const guestRows = document.getElementById('guestRows');
+  document.getElementById('addGuest').addEventListener('click', () => {
+    const row = document.createElement('div');
+    row.className = 'guest-row';
+    row.innerHTML = '<input type="text" class="guestName" placeholder="Guest full name">' +
+      '<button type="button" class="removeGuest" aria-label="Remove guest">&times;</button>';
+    guestRows.appendChild(row);
+  });
+  guestRows.addEventListener('click', (e) => {
+    if(e.target.classList.contains('removeGuest') && guestRows.children.length > 1){
+      e.target.closest('.guest-row').remove();
+    }
+  });
+
   document.getElementById('rsvpConfirm').addEventListener('click', () => {
-    const name = document.getElementById('rsvpName').value.trim();
-    if(!name){ alert('Please enter your name.'); return; }
-    submitToGoogleForm(RSVP_FORM_ID, {
-      'entry.463051025': name,
-      'entry.1267824279': SITE_TAG
+    const names = Array.from(document.querySelectorAll('.guestName'))
+      .map(i => i.value.trim())
+      .filter(n => n.length > 0);
+    if(names.length === 0){ alert('Please enter at least one name.'); return; }
+    names.forEach(name => {
+      submitToGoogleForm(RSVP_FORM_ID, {
+        'entry.463051025': name,
+        'entry.1267824279': SITE_TAG
+      });
     });
     document.getElementById('rsvpNameStep').style.display = 'none';
     document.getElementById('rsvpAfter').style.display = 'block';
+  });
+
+  // "Can't make it" — logged to a separate sheet/form
+  const NO_FORM_ID = '1FAIpQLScA4u_GbiR0ig8nDmILjXrXmQxRY1Ju3WDfha5oEb_CaEMCTA';
+  const NO_NAME_ENTRY = 'entry.755126319';
+
+  document.getElementById('noConfirm').addEventListener('click', () => {
+    const name = document.getElementById('noName').value.trim();
+    if(!name){ alert('Please enter your name.'); return; }
+    submitToGoogleForm(NO_FORM_ID, {
+      [NO_NAME_ENTRY]: name
+    });
+    document.getElementById('noNameStep').style.display = 'none';
+    document.getElementById('noAfter').style.display = 'block';
   });
 </script>
 
