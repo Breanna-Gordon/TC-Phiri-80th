@@ -377,15 +377,16 @@
         <h4>We can't wait to see you!</h4>
 
         <div id="rsvpNameStep">
-          <label style="display:block;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#8a92a8;margin-bottom:0.35rem;">Full Name(s)</label>
-          <p style="font-size:0.72rem;color:#8a92a8;margin-bottom:0.8rem;">RSVPing for more than yourself? Add each guest below.</p>
+          <label style="display:block;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:#8a92a8;margin-bottom:0.35rem;">Your Name</label>
+          <p style="font-size:0.72rem;color:#8a92a8;margin-bottom:0.8rem;">Bringing someone with you? Add 1 guest below.</p>
           <div id="guestRows">
             <div class="guest-row">
-              <input type="text" class="guestName" placeholder="Guest full name">
-              <button type="button" class="removeGuest" aria-label="Remove guest">&times;</button>
+              <input type="text" class="guestName" placeholder="Your full name">
+              <button type="button" class="removeGuest" aria-label="Remove guest" style="visibility:hidden;">&times;</button>
             </div>
           </div>
           <button type="button" id="addGuest" class="add-guest-btn">+ Add another guest</button>
+          <p id="guestCapNote" style="font-size:0.7rem;color:#8a92a8;text-align:center;margin:-0.4rem 0 1rem;">You can add 1 guest.</p>
           <button type="button" id="rsvpConfirm" style="width:100%;background:var(--gold);color:var(--navy-deep);border:none;padding:0.75rem;letter-spacing:0.15em;text-transform:uppercase;font-size:0.68rem;border-radius:3px;cursor:pointer;">Confirm RSVP</button>
         </div>
 
@@ -444,31 +445,59 @@
 
   const RSVP_FORM_ID = '1FAIpQLSfYyKwjyRZm5Wh0APUqMdRTPj8jdGpfRd2LufMJKXsNRGD6UQ';
   const SITE_TAG = 'General';
+  const MAX_ADDITIONAL_GUESTS = 1; // plus the RSVP person themself
+  const MAX_TOTAL_ROWS = MAX_ADDITIONAL_GUESTS + 1;
 
-  // Dynamic guest rows
+  // TODO: add an "Invited by / RSVP'd by" short-answer question to your RSVP
+  // Google Form, then replace this with its real entry ID.
+  const INVITED_BY_ENTRY = 'entry.XXXXXXXXX';
+
+  // Dynamic guest rows (capped at MAX_GUESTS)
   const guestRows = document.getElementById('guestRows');
-  document.getElementById('addGuest').addEventListener('click', () => {
+  const addGuestBtn = document.getElementById('addGuest');
+  const guestCapNote = document.getElementById('guestCapNote');
+
+  function refreshGuestCap(){
+    const atCap = guestRows.children.length >= MAX_TOTAL_ROWS;
+    addGuestBtn.style.display = atCap ? 'none' : 'block';
+    guestCapNote.textContent = atCap
+      ? `You've reached the guest limit (you + ${MAX_ADDITIONAL_GUESTS} guests) for this RSVP.`
+      : `You can add up to ${MAX_ADDITIONAL_GUESTS} guests.`;
+  }
+
+  addGuestBtn.addEventListener('click', () => {
+    if(guestRows.children.length >= MAX_TOTAL_ROWS) return;
     const row = document.createElement('div');
     row.className = 'guest-row';
     row.innerHTML = '<input type="text" class="guestName" placeholder="Guest full name">' +
       '<button type="button" class="removeGuest" aria-label="Remove guest">&times;</button>';
     guestRows.appendChild(row);
+    refreshGuestCap();
   });
   guestRows.addEventListener('click', (e) => {
     if(e.target.classList.contains('removeGuest') && guestRows.children.length > 1){
       e.target.closest('.guest-row').remove();
+      refreshGuestCap();
     }
   });
+  refreshGuestCap();
 
   document.getElementById('rsvpConfirm').addEventListener('click', () => {
     const names = Array.from(document.querySelectorAll('.guestName'))
       .map(i => i.value.trim())
       .filter(n => n.length > 0);
     if(names.length === 0){ alert('Please enter at least one name.'); return; }
+
+    // The first name entered is treated as the primary RSVP — every guest
+    // in this submission (including the primary) is tagged with that name
+    // so the sheet shows who invited whom.
+    const primaryName = names[0];
+
     names.forEach(name => {
       submitToGoogleForm(RSVP_FORM_ID, {
         'entry.463051025': name,
-        'entry.1267824279': SITE_TAG
+        'entry.1267824279': SITE_TAG,
+        [INVITED_BY_ENTRY]: primaryName
       });
     });
     document.getElementById('rsvpNameStep').style.display = 'none';
